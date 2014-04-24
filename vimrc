@@ -17,54 +17,57 @@ filetype indent plugin on                 " 安装完后打开文件类型
 "plugin:
 "Programming for public:
 "提供单个源代码文件的函数列表之类
-Plugin 'vim-scripts/taglist.vim'
+Plugin 'taglist.vim'
+
+"文件浏览器
+Plugin 'The-NERD-tree'
 
 "提供快速注释/反注释代码块的功能
-Plugin 'vim-scripts/The-NERD-Commenter'
+Plugin 'The-NERD-Commenter'
 
 "添加doxygen注释
-Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'DoxygenToolkit.vim'
 
 "提供超强的快速生成代码段的功能
-Plugin 'vim-scripts/UltiSnips'
+Plugin 'UltiSnips'
 
 "给不同的单词高亮，表明不同的变量时很有用
-Plugin 'vim-scripts/VirMark.vim'
+Plugin 'VirMark.vim'
 
 "自动生成/更新文件的作者信息
-Plugin 'vim-scripts/authorinfo'
+Plugin 'AuthorInfo' 
 
 "一个通用的语法检查插件，支持c,js,等等
-Plugin 'vim-scripts/checksyntax'
+Plugin 'checksyntax'
 
 "用来帮助缩进对齐的插件，需要的时候会很好用
-"Plugin 'vim-scripts/Indent Guides'
+"Plugin 'Indent Guides'
 
 "C/C++
 "提供C++代码的自动补全功能
-Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'OmniCppComplete'
 
 "Script that will search for and load cscope.out databases automatically
-Plugin 'vim-scripts/autoload_cscope.vim'
+Plugin 'autoload_cscope.vim'
 
 "提供快速切换.h和.cpp文件的功能
-Plugin 'vim-scripts/a.vim'
+Plugin 'a.vim'
 
 
 "Python
 "提供实时检查python代码语法的功能
-Plugin 'vim-scripts/pyflakes'
+Plugin 'pyflakes'
 
 
 "TOOLS
 "提供列出配色列表的功能，就不用一个个手工去敲配色名字了
-Plugin 'vim-scripts/Color-Scheme-Explorer'
+Plugin 'Color-Scheme-Explorer'
 
 "自动检测文件编码，也可以手动选择文件编码
-Plugin 'vim-scripts/FencView.vim'
+Plugin 'FencView.vim'
 
 "提供命令模式下的补全，可以补全缓冲区中出现过的单词
-Plugin 'vim-scripts/CmdlineComplete'
+Plugin 'CmdlineComplete'
 
 "#用全新的方式在文档中高效的移动光标，革命性的突破
 Plugin 'EasyMotion'
@@ -80,19 +83,22 @@ Plugin 'lookupfile'
 
 Plugin 'genutils'
 
+"Fcitx input
+Plugin 'fcitx.vim'
+
 "Indet
 "提供python的语法缩进，比默认的要好很多
-Plugin 'vim-scripts/indentpython.vim'
+Plugin 'indentpython.vim'
 
 
 "Syntax
-Plugin 'vim-scripts/python.vim'
+Plugin 'python.vim'
 
 "indentLine 更加美观的显示缩进对齐线
-Bundle "Yggdroot/indentLine"
+Bundle 'Yggdroot/indentLine'
 
 "color scheme
-Plugin 'vim-scripts/Solarized'
+Plugin 'Solarized'
 
 
 
@@ -237,8 +243,36 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 "=========================================
 "NERDTree settings
+"" ---------- NERDTree [智能文件浏览器] ----------------
 "=========================================
-noremap  <Leader>nt :NERDTree
+" :NERDTree              --启动NERDTree插件
+"o[小写]                 --切换当前文件或目录的打开、关闭状态
+" u                      --打开上层目录
+"p[小写]                 --返回上层目录
+" P [大写]               --返回根目录
+"K                       --转到当前目录第一个节点
+" J                      --转到当前目录最后的节点
+"m                       --显示文件系统菜单     [增、删、移]
+" ?                      --弹出帮助菜单
+"q                       --退出该插件
+let mapleader=","
+nmap <silent> <leader>t :NERDTree<cr>
+"tab切换
+nnoremap <leader>t gt  
+nnoremap <leader>r gT
+
+
+"=========================================
+"NERD Commenter settings
+"=========================================
+",ca，在可选的注释方式之间切换，比如C/C++ 的块注释/* */和行注释//
+",cc，注释当前行
+",c，切换注释/非注释状态
+",cs，以”性感”的方式注释
+",cA，在当前行尾添加注释符，并进入Insert模式
+",cu，取消注释
+"Normal模式下，几乎所有命令前面都可以指定行数
+"Visual模式下执行命令，会对选中的特定区块进行注释/反注释
 
 
 "===================================================================
@@ -297,12 +331,19 @@ set completeopt=menuone,menu,longest
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DoxygenToolkit setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
-let g:DoxygenToolkit_paramTag_pre="@Param "
-let g:DoxygenToolkit_returnTag="@Returns   "
-let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-let g:DoxygenToolkit_authorName="JiuZhou"
-let g:DoxygenToolkit_licenseTag="JiuZhou own license"
+"let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+"let g:DoxygenToolkit_paramTag_pre="@Param "
+"let g:DoxygenToolkit_returnTag="@Returns   "
+"let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+"let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+"let g:DoxygenToolkit_authorName="JiuZhou"
+"let g:DoxygenToolkit_licenseTag="JiuZhou own license"
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AuthorInfo setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vimrc_author='jz'
+let g:vimrc_email='jz@gmail.com'
+let g:vimrc_homepage='http://www.jz.cn' 
+nmap <F2> :AuthorInfoDetect<cr> 
