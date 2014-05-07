@@ -45,7 +45,11 @@ Plugin 'checksyntax'
 
 "C/C++
 "提供C++代码的自动补全功能
-Plugin 'OmniCppComplete'
+"Plugin 'OmniCppComplete'
+Plugin 'Valloric/YouCompleteMe'
+
+"语法检查
+Plugin 'scrooloose/syntastic'
 
 "Script that will search for and load cscope.out databases automatically
 Plugin 'autoload_cscope.vim'
@@ -309,24 +313,22 @@ noremap <silent> <Leader>ce :cclose<CR>
 set nocp
 filetype plugin on
 "filetype indent on
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_NamespaceSearch = 0
-let OmniCpp_DisplayMode = 0
-let OmniCpp_ShowScopeInAbbr = 0
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_DefaultNamespaces = []
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteScope = 0
-let OmniCpp_SelectFirstItem = 0
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_NamespaceSearch = 0
+"let OmniCpp_DisplayMode = 0
+"let OmniCpp_ShowScopeInAbbr = 0
+"let OmniCpp_ShowPrototypeInAbbr = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_DefaultNamespaces = []
+"let OmniCpp_MayCompleteDot = 1
+"let OmniCpp_MayCompleteArrow = 1
+"let OmniCpp_MayCompleteScope = 0
+"let OmniCpp_SelectFirstItem = 0
 
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest
-
-
-
-
+"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"set completeopt=menuone,menu,longest
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/Plugin/YouCompleteMe/python/ycm/.ycm_extra_conf.py'
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DoxygenToolkit setting
