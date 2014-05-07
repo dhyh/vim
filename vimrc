@@ -26,7 +26,7 @@ Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 
 "添加doxygen注释
-"Plugin 'DoxygenToolkit.vim'
+Plugin 'DoxygenToolkit.vim'
 
 "提供超强的快速生成代码段的功能
 Plugin 'UltiSnips'
@@ -310,7 +310,7 @@ set nocp
 filetype plugin on
 "filetype indent on
 let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_NamespaceSearch = 1
+let OmniCpp_NamespaceSearch = 0
 let OmniCpp_DisplayMode = 0
 let OmniCpp_ShowScopeInAbbr = 0
 let OmniCpp_ShowPrototypeInAbbr = 1
@@ -331,13 +331,13 @@ set completeopt=menuone,menu,longest
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DoxygenToolkit setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
-"let g:DoxygenToolkit_paramTag_pre="@Param "
-"let g:DoxygenToolkit_returnTag="@Returns   "
-"let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-"let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-"let g:DoxygenToolkit_authorName="JiuZhou"
-"let g:DoxygenToolkit_licenseTag="JiuZhou own license"
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="JiuZhou"
+let g:DoxygenToolkit_licenseTag="JiuZhou own license"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
