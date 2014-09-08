@@ -45,8 +45,7 @@ Plugin 'checksyntax'
 
 "C/C++
 "提供C++代码的自动补全功能
-"Plugin 'OmniCppComplete'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'OmniCppComplete'
 
 "语法检查
 Plugin 'scrooloose/syntastic'
@@ -327,7 +326,7 @@ filetype plugin on
 
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "set completeopt=menuone,menu,longest
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/Plugin/YouCompleteMe/python/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/Plugin/YouCompleteMe/python/ycm/.ycm_extra_conf.py'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
