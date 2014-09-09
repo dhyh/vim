@@ -1,4 +1,4 @@
-set nocompatible			              "不兼容vi
+set nocompatible            "不兼容vi
 filetype off
 set rtp+=~/.vim/bundle/vundle             " 将vundle路径添加到插件vim路径
 
@@ -75,9 +75,6 @@ Plugin 'CmdlineComplete'
 "#用全新的方式在文档中高效的移动光标，革命性的突破
 Plugin 'EasyMotion'
 
-"自动识别文件编码；
-Plugin 'FencView.vim'
-
 "让代码更加易于纵向排版，以=或,符号对齐
 Plugin 'Tabular'
 
@@ -127,43 +124,79 @@ filetype plugin on                    " enable filetype-specific plugins
 "set nu       "打开行号显示
 set guifont=MonoSpace\ 16
 
+"VIM UI {
 "设置颜色、背景等
 syntax on                             " syntax highlight
-set hlsearch                          " search highlighting
-set incsearch                         " incremental search
 syntax enable
 set t_Co=256
 set background=dark
 colorscheme solarized
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+set cursorline " highlight current line
+set backspace=indent,eol,start " backspace for dummies
+set linespace=0 " No extra spaces between rows
+set nu " Line numbers on
+set showmatch " show matching brackets/parenthesis
+set incsearch " find as you type search
+set hlsearch " highlight search terms
+set winminheight=0 " windows can be 0 line high
+set ignorecase " case insensitive search
+set smartcase " case sensitive when uc present
+set wildmenu " show list instead of just completing
+set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
+set whichwrap=b,s,h,l,<,>,[,] " backspace and cursor keys wrap to
+set scrolljump=5 " lines to scroll when cursor leaves screen
+set scrolloff=3 " minimum lines to keep above and below cursor
+set foldenable " auto fold code
+set list
+set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+"}
 
-" file encoding 编码
+
+
+
+" Formatting {
+set nowrap " wrap long lines
+set autoindent " indent at the same level of the previous line
+set shiftwidth=4 " use indents of 4 spaces
+set expandtab " tabs are spaces, not tabs
+set tabstop=4 " an indentation every four columns
+set softtabstop=4 " let backspace delete indent
+"set matchpairs+=<:> " match, to be used with %
+set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
+set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
+set completeopt=longest,menu          "设置单词自动补全选项
+set number                            "行号显示
+set numberwidth=4
+set history=1000                      " keep 1000 lines of command line history
+set ruler                             " show the cursor position all the time
+set autoread                          " auto read when file is changed from outside
+set noswapfile
+set nobackup                          " no *~ backup files
+set nowb
+set copyindent                        " copy the previous indentation on autoindenting
+set cindent                           " C语言智能缩进
+set textwidth=80                      " 设置一行字符宽度
+" Remove trailing whitespaces and ^M chars
+autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+" }
+
+
+
+" file encoding 编码{
 set encoding=utf-8
 set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1,euc-jp,utf-16le,chinese
 set fenc=utf-8 enc=utf-8 tenc=utf-8
 scriptencoding utf-8
-
 " disable sound on errors
 " 关闭错误提示声音
 set visualbell
 set noerrorbells
 set t_vb=
 set tm=500
-
-"设置TAB键
-set showtabline=2                     " always show tab
-set wildmode=longest,list             " use emacs-style tab completion when selecting files, etc
-set wildmenu                          " make tab completion for files/buffers act like bash
-set tabstop=4                         " 设置tabstop，即tab键占用的空格数，:help tabstop
-set smarttab                          " insert tabs on the start of a line according to
-set expandtab                         " replace <TAB> with spaces
-" 统一缩进为4
-set softtabstop=4
-set shiftwidth=4
-" 不要用空格代替制表符
-set noexpandtab
-
-
-" ignores
 " 忽略文件类型
 set wildignore+=*.o,*.obj,*.pyc                " output objects
 set wildignore+=*.png,*.jpg,*.gif,*.ico        " image format
@@ -174,29 +207,24 @@ set wildignore+=*sass-cache*
 set wildignore+=*.DS_Store
 set wildignore+=log/**
 set wildignore+=tmp/**
+"}
 
-" CTRL+N 打开一个新TAB
-imap <C-N> <esc>:tabnew<CR>
-nmap <C-N> :tabnew<CR>
-
-"行号显示
-set number
-set numberwidth=4
-set history=1000                      " keep 1000 lines of command line history
-set ruler                             " show the cursor position all the time
-set autoread                          " auto read when file is changed from outside
-set cursorline                        " 突出当前行
-set noswapfile
-set nobackup                          " no *~ backup files
-set nowb
-set copyindent                        " copy the previous indentation on autoindenting
-set smartcase
-set cindent                           " C语言智能缩进
-set textwidth=80                      " 设置一行字符宽度
-set comments=sl:/*,mb:**,elx:*        "自动补全注释符号
-set completeopt=longest,menu          "设置单词自动补全选项
-set autoindent                        "设置自动缩进
-set hlsearch                          "设置搜索时高亮显示搜索字，:help hlsearch
+" Key (re)Mappings {
+"The default leader is '\', but many people prefer ',' as it's in a standard
+"location
+let mapleader = ','
+"clearing highlighted search
+nmap <silent> <leader>/ :nohlsearch<CR>
+" Shortcuts
+" http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
+" Easier horizontal scrolling
+map zl zL
+map zh zH
 
 "=====================================================================
 "taglist option，设置taglist插件的选项，进行定制
@@ -204,7 +232,6 @@ set hlsearch                          "设置搜索时高亮显示搜索字，:h
 let Tlist_Show_One_File=1      "只显示一个文件的tags
 let Tlist_Exit_OnlyWindow=1    "当taglist窗口是最后一个窗口时，退出vim
 let Tlist_Use_Right_Window=1   "taglist窗口显示在右侧
-let mapleader = ","            "修改引导符为",",默认为"\"，后面都使用修改后的值
 noremap <silent> <F6> :TlistToggle<CR>      "相当于定义快捷键
 noremap <silent> <Leader>tt :TlistToggle<CR>  "定义第二个快捷键
 "==========================================================================
@@ -258,11 +285,8 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "m                       --显示文件系统菜单     [增、删、移]
 " ?                      --弹出帮助菜单
 "q                       --退出该插件
-let mapleader=","
-nmap <silent> <leader>t :NERDTree<cr>
-"tab切换
-nnoremap <leader>t gt  
-nnoremap <leader>r gT
+"nmap <silent> <leader>t :NERDTree<cr>
+noremap <silent> <F2> :NERDTree<CR>      "相当于定义快捷键
 
 
 "=========================================
@@ -281,29 +305,29 @@ nnoremap <leader>r gT
 "===================================================================
 " lookupfile setting
 "===================================================================
- let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
- let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
- let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
- let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
- let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
- if filereadable("./lookup.files")                "设置tag文件的名字
-    let g:LookupFile_TagExpr = '"./lookup.files"'
- endif
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+if filereadable("./lookup.files")                "设置tag文件的名字
+let g:LookupFile_TagExpr = '"./lookup.files"'
+endif
 
- nmap <silent> <Leader>lf <Plug>LookupFile<CR>
- nnoremap <silent> <Leader>lb :LUBufs<CR>
- nnoremap <silent> <Leader>lw :LUWalk<CR>
- nnoremap <silent> <Leader>lt :LUTags<CR>
+nmap <silent> <Leader>lf <Plug>LookupFile<CR>
+nnoremap <silent> <Leader>lb :LUBufs<CR>
+nnoremap <silent> <Leader>lw :LUWalk<CR>
+nnoremap <silent> <Leader>lt :LUTags<CR>
 
 "======================================
 "quickfix setting
 "======================================
-noremap <silent> <Leader>cn :cn<CR>
-noremap <silent> <Leader>cp :cp<CR>
-noremap <silent> <Leader>cw :cw<CR>
-noremap <silent> <Leader>cc :cc<CR>
-noremap <silent> <Leader>co :copen<CR>
-noremap <silent> <Leader>ce :cclose<CR>
+"noremap <silent> <Leader>cn :cn<CR>
+"noremap <silent> <Leader>cp :cp<CR>
+"noremap <silent> <Leader>cw :cw<CR>
+"noremap <silent> <Leader>cc :cc<CR>
+"noremap <silent> <Leader>co :copen<CR>
+"noremap <silent> <Leader>ce :cclose<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -324,10 +348,6 @@ filetype plugin on
 "let OmniCpp_MayCompleteScope = 0
 "let OmniCpp_SelectFirstItem = 0
 
-"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-"set completeopt=menuone,menu,longest
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/Plugin/YouCompleteMe/python/ycm/.ycm_extra_conf.py'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DoxygenToolkit setting
@@ -347,4 +367,4 @@ let g:DoxygenToolkit_licenseTag="JiuZhou own license"
 let g:vimrc_author='jz'
 let g:vimrc_email='jz@gmail.com'
 let g:vimrc_homepage='http://www.jz.cn' 
-nmap <F2> :AuthorInfoDetect<cr> 
+"}
