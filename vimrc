@@ -262,6 +262,7 @@ if has("cscope")
     endif
     set csverb
 endif
+"ctrl+shift+- equal <C-_>
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
